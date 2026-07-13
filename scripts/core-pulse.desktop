@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Core Pulse
+Comment=CPU, GPU, RAM, Disk, and Network monitor
+Exec=core-pulse
+Icon=utilities-system-monitor
+Type=Application
+Categories=System;Monitor;
+Terminal=false
+StartupNotify=false
