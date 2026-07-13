@@ -1,6 +1,5 @@
 # Rust
 target/
-Cargo.lock
 
 # OS
 .DS_Store
@@ -18,3 +17,7 @@ Thumbs.db
 *.o
 *.so
 *.dylib
+
+# Release artifacts
+*.tar.gz
+*.deb
