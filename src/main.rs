@@ -1,4 +1,5 @@
 mod monitor;
+mod mcp;
 
 use std::cell::RefCell;
 use std::rc::Rc;
@@ -23,6 +24,16 @@ struct AppState {
 }
 
 fn main() {
+    let args: Vec<String> = std::env::args().collect();
+    if args.get(1).map(|s| s.as_str()) == Some("mcp") {
+        eprintln!("core-pulse: starting MCP server");
+        if let Err(e) = mcp::run() {
+            eprintln!("core-pulse: MCP server error: {}", e);
+            std::process::exit(1);
+        }
+        return;
+    }
+
     let app = Application::new(Some("com.corepulse.monitor"), Default::default());
     app.connect_activate(build_ui);
     app.run();
