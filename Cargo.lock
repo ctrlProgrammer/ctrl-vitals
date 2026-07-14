@@ -48,7 +48,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "core-pulse"
+name = "ctrl-vitals"
 version = "0.2.0"
 dependencies = [
  "gtk4",

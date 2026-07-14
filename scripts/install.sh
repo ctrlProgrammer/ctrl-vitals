@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-BIN="core-pulse"
-DESKTOP="scripts/core-pulse.desktop"
+BIN="ctrl-vitals"
+DESKTOP="scripts/ctrl-vitals.desktop"
 
 echo "==> Installing $BIN..."
 
-# Install binary
 if [ "${1:-}" = "--system" ]; then
     echo "    System-wide install (requires sudo)"
     sudo install -m 755 "target/release/$BIN" /usr/local/bin/

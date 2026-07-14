@@ -98,7 +98,7 @@ fn handle_initialize(_req: &serde_json::Value, id: Option<u64>) -> JsonRpcRespon
             "tools": {}
         },
         "serverInfo": {
-            "name": "core-pulse",
+            "name": "ctrl-vitals",
             "version": env!("CARGO_PKG_VERSION")
         }
     }))

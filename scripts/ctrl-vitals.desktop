@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Core Pulse
-Comment=CPU, GPU, RAM, Disk, and Network monitor
-Exec=core-pulse
+Name=Ctrl Vitals
+Comment=CPU, GPU, RAM, Disk, Network, and Process monitor
+Exec=ctrl-vitals
 Icon=utilities-system-monitor
 Type=Application
 Categories=System;Monitor;

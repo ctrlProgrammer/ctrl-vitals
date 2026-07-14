@@ -26,15 +26,15 @@ struct AppState {
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.get(1).map(|s| s.as_str()) == Some("mcp") {
-        eprintln!("core-pulse: starting MCP server");
+        eprintln!("ctrl-vitals: starting MCP server");
         if let Err(e) = mcp::run() {
-            eprintln!("core-pulse: MCP server error: {}", e);
+            eprintln!("ctrl-vitals: MCP server error: {}", e);
             std::process::exit(1);
         }
         return;
     }
 
-    let app = Application::new(Some("com.corepulse.monitor"), Default::default());
+    let app = Application::new(Some("com.ctrl-vitals.monitor"), Default::default());
     app.connect_activate(build_ui);
     app.run();
 }
@@ -42,9 +42,9 @@ fn main() {
 fn build_ui(app: &Application) {
     let sensor = monitor::detect_temp_sensor();
     if sensor.is_some() {
-        eprintln!("core-pulse: using sensor at k10temp");
+        eprintln!("ctrl-vitals: using sensor at k10temp");
     } else {
-        eprintln!("core-pulse: no CPU temperature sensor found");
+        eprintln!("ctrl-vitals: no CPU temperature sensor found");
     }
 
     let initial = monitor::read_all_cpu_snapshots().unwrap_or_default();
@@ -53,7 +53,7 @@ fn build_ui(app: &Application) {
     } else {
         0
     };
-    eprintln!("core-pulse: detected {} CPU cores", core_count);
+    eprintln!("ctrl-vitals: detected {} CPU cores", core_count);
 
     let state = Rc::new(RefCell::new(AppState {
         prev_snapshots: initial,
@@ -67,7 +67,7 @@ fn build_ui(app: &Application) {
 
     let iface = monitor::detect_active_interface()
         .unwrap_or_else(|| "eth0".to_string());
-    eprintln!("core-pulse: network interface: {}", iface);
+    eprintln!("ctrl-vitals: network interface: {}", iface);
     let net_monitor = Rc::new(RefCell::new(monitor::NetMonitor::new(iface)));
 
     let header = Label::new(Some("CPU Performance"));

@@ -1,4 +1,4 @@
-# Core Pulse
+# Ctrl Vitals
 
 ![screenshot](assets/image.png)
 
@@ -19,7 +19,7 @@ Dual mode: launch the GUI widget, or use the MCP server to give AI agents real-t
 
 ## MCP Server for AI Agents
 
-Core Pulse doubles as an [MCP](https://modelcontextprotocol.io) server. AI agents (Claude Desktop, Cline, Cursor, etc.) can query real-time hardware stats without any daemon, HTTP port, or configuration.
+Ctrl Vitals doubles as an [MCP](https://modelcontextprotocol.io) server. AI agents (Claude Desktop, Cline, Cursor, etc.) can query real-time hardware stats without any daemon, HTTP port, or configuration.
 
 ### Tools exposed
 
@@ -41,8 +41,8 @@ Add to your MCP config (`~/.config/opencode/mcp.json` or `claude_desktop_config.
 ```json
 {
   "mcpServers": {
-    "core-pulse": {
-      "command": "core-pulse",
+    "ctrl-vitals": {
+      "command": "ctrl-vitals",
       "args": ["mcp"]
     }
   }
@@ -61,13 +61,13 @@ The agent will call the corresponding tools and respond with live data.
 
 ```bash
 # List available tools
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | core-pulse mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/list"}' | ctrl-vitals mcp
 
 # Get CPU usage (takes ~200ms for a fresh sample)
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_cpu_usage","arguments":{}}}' | core-pulse mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_cpu_usage","arguments":{}}}' | ctrl-vitals mcp
 
 # Get RAM stats
-echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_ram_stats","arguments":{}}}' | core-pulse mcp
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_ram_stats","arguments":{}}}' | ctrl-vitals mcp
 ```
 
 ## Install
@@ -76,16 +76,16 @@ echo '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"get_ram_st
 
 ```bash
 # tar.gz
-tar xzf core-pulse-v0.2.0-linux-x86_64.tar.gz
+tar xzf ctrl-vitals-v0.2.0-linux-x86_64.tar.gz
 ./install.sh          # user install (~/.local/bin)
 # or
 sudo ./install.sh --system  # system-wide (/usr/local/bin)
 
 # .deb
-sudo dpkg -i core-pulse_0.2.0_amd64.deb
+sudo dpkg -i ctrl-vitals_0.2.0_amd64.deb
 ```
 
-Both methods install `core-pulse` to your PATH. The MCP server and GUI widget are the **same binary** — just use `core-pulse mcp` for the server or `core-pulse` for the GUI.
+Both methods install `ctrl-vitals` to your PATH. The MCP server and GUI widget are the **same binary** — just use `ctrl-vitals mcp` for the server or `ctrl-vitals` for the GUI.
 
 ### From source
 
@@ -94,20 +94,42 @@ sudo apt install libgtk-4-dev   # Ubuntu/Debian
 # or
 sudo dnf install gtk4-devel      # Fedora
 
-cargo install --git https://github.com/YOUR_USER/core-pulse
+cargo install --git https://github.com/YOUR_USER/ctrl-vitals
 ```
 
 ## Usage
 
 ```bash
-core-pulse          # Launch GUI widget
-core-pulse mcp      # Start MCP server (stdin/stdout)
+ctrl-vitals          # Launch GUI widget
+ctrl-vitals mcp      # Start MCP server (stdin/stdout)
 ```
 
 ### GUI controls
 - **Drag** anywhere on the window to move it
 - **Resize** by dragging the edges
 - **Close** with Ctrl+C in the terminal
+
+## Uninstall
+
+**If installed via .deb:**
+```bash
+sudo dpkg -r ctrl-vitals
+```
+
+**If installed via `install.sh --system`:**
+```bash
+sudo rm /usr/local/bin/ctrl-vitals /usr/local/share/applications/ctrl-vitals.desktop
+```
+
+**If installed via `install.sh` (user):**
+```bash
+rm ~/.local/bin/ctrl-vitals ~/.local/share/applications/ctrl-vitals.desktop
+```
+
+**If installed via `cargo install`:**
+```bash
+cargo uninstall ctrl-vitals
+```
 
 ## Requirements
 
